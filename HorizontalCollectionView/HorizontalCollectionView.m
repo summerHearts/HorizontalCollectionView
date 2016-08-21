@@ -38,7 +38,7 @@
 }
 
 
-- (void)setDataSource:(NSArray *)dataSource{
+- (void)setDataSource:(NSMutableArray *)dataSource{
     _dataSource = [dataSource mutableCopy];
     if (self.isCyclicRolling) {
         if (dataSource.count > 1){
@@ -100,18 +100,25 @@
                                             animated:NO];
         }
     }
-    
 }
 
 #pragma mark UIScrollView 滚动方向
-- (void)setDirection:(ScrollDirection)direction
-{
-    if (direction == ScrollDirectionHorizontal) {
-        _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    }else{
-        _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    }
+- (void)setDirection:(ScrollDirection)direction{
     _direction = direction;
+    switch (direction) {
+        case 0:{
+            _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+
+        }
+            break;
+        case 1:{
+            _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 @end
